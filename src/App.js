@@ -1,27 +1,38 @@
 import React, { useState, useEffect } from "react";
-import AddForm from "./components/Form";
-
-import logo from './logo.svg';
-import './App.css';
+// import logo from "./logo.svg";
+import "./App.css";
+import NewForm from "./components/Form";
+import { Container, Row, Col } from "reactstrap";
+import axios from "axios";
+import UserTable from "./components/UserTable";
 
 function App() {
+  const [post, setPost] = useState([]);
+
+  const submitUser = (newUser) => {
+    axios
+      .post("https://reqres.in/api/users", newUser)
+      .then((response) => {
+        setPost(response.data);
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className="App">
+      <Row>
+        <Col xs="12" md="4" b xl="5" style={{ marginRight: "5%" }}>
+          <NewForm submitUser={submitUser}></NewForm>
+        </Col>
+        <Col>
+          <h1>USERS</h1>
+          <UserTable user={post} />
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
