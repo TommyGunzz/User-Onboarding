@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-import "./component.css";
+// import "./component.css";
 import * as yup from "yup";
 
 
@@ -51,7 +51,7 @@ const NewForm = ({ submitUser }) => {
         console.log("valid?", valid);
         setIsButtonDisabled(!valid);
       });
-    }, [formState]);
+    }, [formSchema, formState]);
   
     const handleChange = (e) => {
       e.persist();
