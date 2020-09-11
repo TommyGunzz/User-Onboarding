@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import "./component.css";
+import * as yup from "yup";
+
 
 const NewForm = ({ submitUser }) => {
     const [formState, setFormState] = useState({
